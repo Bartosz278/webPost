@@ -1,7 +1,6 @@
 body {
     background-color: #2d2e2b;
     height: 100vh;
-    overflow: unset;
 }
 
 
@@ -44,9 +43,9 @@ p {
 
 #btn {
     width: 75px;
-    margin: 0 auto;
-    margin-top: 15px;
     cursor: pointer;
+    margin: auto;
+    padding-top: 4px;
 }
 
 .openNavButton {
@@ -88,7 +87,7 @@ p {
     font-size: 45px;
     padding-top: 0px;
     cursor: pointer;
-    height: 30px;
+    height: 35px;
     width: 40px;
     margin: auto;
     padding: auto;

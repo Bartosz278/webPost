@@ -15,4 +15,4 @@ TODO:
     function copyText() {
         document.getElementById("innerOutput").value = textField.innerText;
     }
-    // document.getElementById("sendButton").dadEventListener("click", copyText);l
+    // document.getElementById("sendButton").dadEventListener("click", copyText);
