@@ -15,4 +15,17 @@ TODO:
     function copyText() {
         document.getElementById("innerOutput").value = textField.innerText;
     }
-    // document.getElementById("sendButton").dadEventListener("click", copyText);
+    // 
+
+
+function solution(number) {
+    const abc = [];
+    let x = 0;
+    for (i = number; i--; i > 0) {
+        abc.push(i + 1);
+        if (i % 3 == 0 || i % 5 == 0) {
+            x = x + i;
+        }
+    }
+    return x
+}
