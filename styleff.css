@@ -8,6 +8,7 @@ header {
 header span {
     font-size: 17px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    margin-top: 6px;
 }
 
 nav {
@@ -19,13 +20,13 @@ nav {
 }
 
 nav a {
-    font-size: 100%;
+    font-size: 27px;
     padding: 10px;
     font-family: 'Akshar', sans-serif;
     font-weight: 600;
     float: right;
     text-decoration: none;
-    color: rgb(32, 32, 167);
+    color: rgb(28, 24, 87);
 }
 
 #mainLogo {
@@ -88,4 +89,8 @@ h1 {
     width: 90vw;
     opacity: 50%;
     border-radius: 2px;
+}
+
+.navIcons {
+    padding-left: 15px;
 }
