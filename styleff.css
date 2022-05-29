@@ -244,16 +244,15 @@ section #contentInImage #showMoreButton {
   padding: 4px;
   float: left;
   width: 23vw;
-  min-width: 200px;
+  min-width: 100px;
   max-width: 370px;
   cursor: pointer;
   display: flex;
   align-items: center;
-  float: left;
   font-family: "Roboto Mono", monospace;
 }
 section #contentInImage #showMoreButton img {
-  float: right;
+  float: left;
 }
 section #solarImage,
 section #solarImage2 {
@@ -280,6 +279,23 @@ section #solarImage2 {
 
   #mainLogo {
     margin-left: 20px;
+  }
+}
+@media screen and (max-width: 900px) {
+  nav #navHandler,
+#toHide,
+#solarImage {
+    display: none;
+  }
+
+  section #solarImage2,
+.burger,
+.burger-text {
+    display: block;
+  }
+
+  #mainLogo {
+    margin-left: 30px;
   }
 }
 
