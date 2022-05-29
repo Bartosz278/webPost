@@ -1,118 +1,286 @@
 header {
-    background-color: white;
-    display: flex;
-    gap: 10px;
-    justify-content: center;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
 }
-
 header span {
-    font-size: 17px;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    margin-top: 6px;
-}
-
-nav {
-    width: 100%;
-    display: flex;
-    align-items: center;
-}
-
-nav a {
-    font-size: 23px;
-    padding: 0px 10px;
-    font-family: 'Akshar', sans-serif;
-    font-weight: 600;
-    text-decoration: none;
-    color: rgb(28, 24, 87);
-}
-
-#mainLogo {
-    width: 280px;
-    padding: 10px;
-    margin-left: 40px;
-    float: left;
-}
-
-#solarImage,
-#solarImage2 {
-    max-width: 100%;
-    width: 100%;
-    max-height: 80vh;
-}
-
-#navHandler {
-    float: left;
-    width: 55%;
-    display: flex;
-    justify-content: space-evenly;
-}
-
-h1 {
-    font-family: 'Roboto Mono', monospace;
-    font-weight: bold;
-    color: white;
-    font-size: calc(3.5vw + 3.5vh);
-    width: 100%;
-}
-
-#showMoreButton {
-    font-family: 'Roboto Mono', monospace;
-    font-weight: bold;
-    width: 20vw;
-    height: 5.3vh;
-    padding: 4px;
-    border-radius: 2px 0px 0px 2px;
-    color: white;
-    font-size: 2.5vmax;
-    background-color: rgb(37, 185, 37);
-    float: left;
-    margin-top: 10px;
-    cursor: pointer;
-}
-
-#arrowButton {
-    background-color: rgb(37, 185, 37);
-    width: 3.5vmax, 3.5vmin;
-    float: left;
-    height: 5.3vh;
-    padding: 4px;
-    margin-top: 10px;
-    cursor: pointer;
-}
-
-#contentInImage {
-    width: 40%;
-    height: 170px;
-    position: absolute;
-    top: 20%;
-    left: 17vw;
-    padding: 3px;
+  font-size: 17px;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  margin-top: 6px;
+  padding-right: 15px;
 }
 
 #headerNavLine {
-    width: 90vw;
-    opacity: 50%;
-    border-radius: 2px;
+  width: 80%;
+  opacity: 50%;
+  margin: auto;
 }
 
-.navIcons {
-    padding-left: 15px;
+nav {
+  display: flex;
+  align-items: center;
+}
+nav a {
+  font-size: 23px;
+  padding: 0px 10px;
+  font-family: "Akshar", sans-serif;
+  font-weight: 600;
+  text-decoration: none;
+  color: rgb(28, 24, 87);
+}
+nav img {
+  width: 280px;
+  padding: 10px;
+  margin-left: 40px;
+  float: left;
+}
+nav #navHandler {
+  float: left;
+  width: 55%;
+  display: flex;
+  justify-content: space-evenly;
 }
 
-#solarImage2 {
+.main-nav {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  text-align: center;
+  background: #FFF;
+  opacity: 0;
+  z-index: -1;
+  visibility: hidden;
+  transition: all 0.375s;
+}
+
+.main-nav.is-open {
+  opacity: 1;
+  z-index: 100;
+  visibility: visible;
+}
+
+/* Yellow band effect */
+.main-nav::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: -15px;
+  background: #52504a;
+  transform-origin: 0 0;
+  transform: skew(-14deg) translateX(-120%);
+  transition: all 0.275s 0.1s;
+}
+
+.main-nav.is-open::before {
+  transform: skew(-14deg) translateX(0);
+}
+
+/* Skewing effect on menu links */
+.main-nav ul {
+  display: inline-flex;
+  flex-direction: column;
+  height: 100%;
+  align-items: flex-end;
+  justify-content: center;
+  transform: translateX(30px) skew(-16deg);
+}
+
+.main-nav li {
+  display: block;
+  margin: 0.5rem 0;
+  text-align: right;
+  transform: skew(16deg);
+}
+
+/* Apparition effect on links */
+.main-nav a {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+.main-nav.is-open a {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.main-nav li:nth-child(1) a {
+  transition: all 275ms 175ms;
+}
+
+.main-nav li:nth-child(2) a {
+  transition: all 275ms 225ms;
+}
+
+.main-nav li:nth-child(3) a {
+  transition: all 275ms 275ms;
+}
+
+.main-nav li:nth-child(4) a {
+  transition: all 275ms 325ms;
+}
+
+.main-nav li:nth-child(5) a {
+  transition: all 275ms 375ms;
+}
+
+/* Decoration */
+.main-nav ul,
+.main-nav li {
+  list-style: none;
+  padding: 0;
+}
+
+.main-nav a {
+  display: block;
+  padding: 12px 0;
+  color: #ffffff;
+  font-size: 1.4em;
+  text-decoration: none;
+  font-weight: 550;
+}
+
+.open-main-nav {
+  position: absolute;
+  top: 15px;
+  padding-top: 45px;
+  right: 15px;
+  z-index: 1000;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+.open-main-nav:focus {
+  outline: none;
+}
+
+.burger {
+  position: relative;
+  display: none;
+  width: 28px;
+  height: 4px;
+  margin: 0 auto;
+  background: #52504a;
+  transform: skew(5deg);
+  transition: all 0.275s;
+}
+
+.burger:after,
+.burger:before {
+  content: "";
+  display: block;
+  height: 100%;
+  background: #5A3B5D;
+  transition: all 0.275s;
+}
+
+.burger:after {
+  transform: translateY(-12px) translateX(-2px) skew(-20deg);
+}
+
+.burger:before {
+  transform: translateY(-16px) skew(-10deg);
+}
+
+/* Toggle State part */
+.is-open .burger {
+  transform: skew(5deg) translateY(-8px) rotate(-45deg);
+  background-color: white;
+}
+
+.is-open .burger:before {
+  transform: translateY(0px) skew(-10deg) rotate(75deg);
+  background-color: white;
+}
+
+.is-open .burger:after {
+  transform: translateY(-12px) translateX(10px) skew(-20deg);
+  opacity: 0;
+  background-color: white;
+}
+
+.is-open .burger-text {
+  color: white;
+}
+
+/* MENU Text part */
+.burger-text {
+  display: none;
+  font-size: 0.675rem;
+  letter-spacing: 0.05em;
+  margin-top: 0.5em;
+  text-transform: uppercase;
+  font-weight: 500;
+  text-align: center;
+  color: #52504a;
+}
+
+section #contentInImage {
+  width: 40%;
+  height: 170px;
+  position: absolute;
+  top: 20%;
+  left: 17vw;
+  padding: 3px;
+}
+section #contentInImage h1 {
+  font-family: "Roboto Mono", monospace;
+  font-weight: bold;
+  color: white;
+  font-size: calc(3.5vw + 3.5vh);
+}
+section #contentInImage #showMoreButton {
+  color: white;
+  font-weight: bold;
+  border-radius: 2px;
+  font-size: 2vmax;
+  background-color: rgb(37, 185, 37);
+  height: 5.3vh;
+  margin-top: 13px;
+  padding: 4px;
+  float: left;
+  width: 23vw;
+  min-width: 200px;
+  max-width: 370px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  float: left;
+  font-family: "Roboto Mono", monospace;
+}
+section #contentInImage #showMoreButton img {
+  float: right;
+}
+section #solarImage,
+section #solarImage2 {
+  max-width: 100%;
+  width: 100%;
+  max-height: 80vh;
+}
+section #solarImage2 {
+  display: none;
+}
+
+@media screen and (max-width: 900px) {
+  nav #navHandler,
+#toHide,
+#solarImage {
     display: none;
+  }
+
+  section #solarImage2,
+.burger,
+.burger-text {
+    display: block;
+  }
+
+  #mainLogo {
+    margin-left: 20px;
+  }
 }
 
-@media screen and (max-width: 900px) {
-    #navHandler,
-    #toHide,
-    #solarImage {
-        display: none;
-    }
-}
-
-@media screen and (max-width: 900px) {
-    #solarImage2 {
-        display: block;
-    }
-}
+/*# sourceMappingURL=styleff.css.map */
