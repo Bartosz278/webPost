@@ -18,6 +18,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Akshar&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@200&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 </head>
 
@@ -27,15 +28,34 @@
     </header>
     <hr id="headerNavLine">
     <nav>
-        <img alt="logo Ayon Energy" src="images/AyonEnergy.png" id="mainLogo">
+        <a href="ff.html"><img alt="logo Ayon Energy" src="images/AyonEnergy.png" id="mainLogo"></a>
         <div id="navHandler">
-            <a href="#">Inne produkty</a>
-            <a href="#">Fotowoltaika</a>
-            <a href="#">Pompy ciepła</a>
-            <a href="#">O nas</a>
+
+            <div class="dropDown"><a href="#">Fotowoltaika<span class="material-symbols-outlined">
+                expand_more</a>
+                <div class="dropDownContent"><a>Dla domu</a><a>Dla firmy</a><a>Więcej </a></div>
+            </div>
+            <div class="dropDown">
+                <a href="#">Pompy ciepła<span class="material-symbols-outlined">
+                expand_more</a>
+                <div class="dropDownContent"><a>Dla domu</a><a>Dla Firmy</a><a>Więcej </a></div>
+            </div>
+            <div class="dropDown">
+                <a href="#">Inne produkty<span class="material-symbols-outlined">
+                    expand_more
+                    </a>
+                <div class="dropDownContent"><a>Klimatyzacja</a><a>Magazyny energii</a></div>
+            </div>
+            <div class="dropDown">
+                <a href="#">O nas<span class="material-symbols-outlined">
+                expand_more</a>
+                <div class="dropDownContent"><a>Informacje</a><a>Umowy</a><a>Regulamin</a></div>
+            </div>
             <a href="#">Kontakt</a>
         </div>
+
     </nav>
+
     <button id="burger" class="open-main-nav">
         <span class="burger"></span>
         <span class="burger-text">Menu</span>
@@ -43,13 +63,13 @@
     <nav class="main-nav" id="main-nav">
         <ul>
             <li>
-                <a href="#">Inne produkty</a>
-            </li>
-            <li>
                 <a href="#">Fotowoltaika</a>
             </li>
             <li>
                 <a href="#">Pompy ciepła</a>
+            </li>
+            <li>
+                <a href="#">Inne produkty</a>
             </li>
             <li>
                 <a href="#">O nas</a>

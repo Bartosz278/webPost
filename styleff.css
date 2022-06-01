@@ -1,7 +1,12 @@
+body {
+  background-color: rgb(250, 250, 250);
+}
+
 header {
   display: flex;
   gap: 10px;
   justify-content: center;
+  background-color: rgb(250, 250, 250);
 }
 header span {
   font-size: 17px;
@@ -10,23 +15,32 @@ header span {
   padding-right: 15px;
 }
 
+.dropDownContent {
+  position: absolute;
+  visibility: hidden;
+  background-color: white;
+  border-radius: 4px;
+  padding: 10px;
+  -webkit-box-shadow: 0px 9px 22px -7px rgb(66, 68, 90);
+  -moz-box-shadow: 0px 9px 22px -7px rgb(66, 68, 90);
+  box-shadow: 0px 9px 22px -7px rgb(66, 68, 90);
+}
+
+.dropDown:hover .dropDownContent {
+  visibility: visible;
+}
+
 #headerNavLine {
   width: 80%;
   opacity: 50%;
   margin: auto;
+  background-color: rgb(250, 250, 250);
 }
 
 nav {
   display: flex;
   align-items: center;
-}
-nav a {
-  font-size: 23px;
-  padding: 0px 10px;
-  font-family: "Akshar", sans-serif;
-  font-weight: 600;
-  text-decoration: none;
-  color: rgb(28, 24, 87);
+  background-color: rgb(250, 250, 250);
 }
 nav img {
   width: 280px;
@@ -39,6 +53,17 @@ nav #navHandler {
   width: 55%;
   display: flex;
   justify-content: space-evenly;
+  align-items: center;
+}
+nav #navHandler a {
+  font-size: 23px;
+  padding: 0px 10px;
+  font-family: "Akshar", sans-serif;
+  font-weight: 400;
+  text-decoration: none;
+  color: rgb(28, 24, 87);
+  display: flex;
+  align-items: center;
 }
 
 .main-nav {
@@ -221,6 +246,9 @@ nav #navHandler {
   color: #52504a;
 }
 
+section {
+  background-color: rgb(250, 250, 250);
+}
 section #contentInImage {
   width: 40%;
   height: 170px;
@@ -281,23 +309,6 @@ section #solarImage2 {
 
   #mainLogo {
     margin-left: 20px;
-  }
-}
-@media screen and (max-width: 900px) {
-  nav #navHandler,
-#toHide,
-#solarImage {
-    display: none;
-  }
-
-  section #solarImage2,
-.burger,
-.burger-text {
-    display: block;
-  }
-
-  #mainLogo {
-    margin-left: 30px;
   }
 }
 
