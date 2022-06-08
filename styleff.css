@@ -326,9 +326,44 @@ section a h2 img {
   padding-left: 30px;
 }
 section #offer {
-  height: 800px;
-  background: url("images/theme5.png");
+  height: 700px;
+  background: url("images/theme6.png");
   background-repeat: no-repeat;
+  display: flex;
+  justify-content: flex-end;
+}
+section #offer .offerContent {
+  display: flex;
+  justify-content: flex-end;
+  padding: 20px;
+  margin: 40px;
+  background-color: rgba(59, 59, 59, 0.7960784314);
+  height: 550px;
+  width: 800px;
+  -webkit-clip-path: polygon(100% 0%, 100% 52%, 100% 100%, 33% 100%, 0% 50%, 33% 0);
+  clip-path: polygon(100% 0%, 100% 52%, 100% 100%, 33% 100%, 0% 50%, 33% 0);
+  -webkit-box-shadow: 2px 2px 32px 8px rgb(66, 68, 90);
+  -moz-box-shadow: 2px 2px 32px 8px rgb(66, 68, 90);
+  box-shadow: 2px 2px 32px 8px rgb(66, 68, 90);
+}
+section #offer .offerContent h4 {
+  margin-top: 30px;
+  width: 500px;
+  height: 60px;
+  color: black;
+}
+section #offer .offerContent img {
+  height: 80px;
+  position: absolute;
+  right: 580px;
+  transform: translate(-80px);
+  align-self: center;
+}
+section #offer .offerContent #description {
+  width: 500px;
+  color: rgb(10, 9, 9);
+  position: absolute;
+  transform: translate(0px, 100px);
 }
 
 @media screen and (max-width: 900px) {
@@ -360,6 +395,11 @@ section #offer {
   section a h2 img {
     padding-left: 10px;
     height: 30px;
+  }
+}
+@media screen and (max-width: 1200px) {
+  section #offer .offerContent {
+    display: none;
   }
 }
 
