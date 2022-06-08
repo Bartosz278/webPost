@@ -1,18 +1,21 @@
 body {
-  background-color: rgb(250, 250, 250);
+  background-color: rgb(245, 245, 245);
 }
 
 header {
   display: flex;
   gap: 10px;
   justify-content: center;
-  background-color: rgb(250, 250, 250);
+  background-color: rgb(230, 230, 230);
 }
 header span {
-  font-size: 17px;
+  font-size: 13px;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   margin-top: 6px;
   padding-right: 15px;
+}
+header .navIcons {
+  height: 8px;
 }
 
 .dropDownContent {
@@ -21,26 +24,34 @@ header span {
   background-color: white;
   border-radius: 4px;
   padding: 10px;
+  box-sizing: border-box;
+  z-index: 1;
   -webkit-box-shadow: 0px 9px 22px -7px rgb(66, 68, 90);
   -moz-box-shadow: 0px 9px 22px -7px rgb(66, 68, 90);
   box-shadow: 0px 9px 22px -7px rgb(66, 68, 90);
+}
+.dropDownContent a {
+  cursor: pointer;
 }
 
 .dropDown:hover .dropDownContent {
   visibility: visible;
 }
 
+.dropDown a:hover {
+  text-shadow: 0px 0px 1px rgb(0, 0, 0);
+  transition: 0.3s;
+}
+
 #headerNavLine {
-  width: 80%;
   opacity: 50%;
   margin: auto;
-  background-color: rgb(250, 250, 250);
 }
 
 nav {
   display: flex;
   align-items: center;
-  background-color: rgb(250, 250, 250);
+  background-color: rgb(245, 245, 245);
 }
 nav img {
   width: 280px;
@@ -61,9 +72,14 @@ nav #navHandler a {
   font-family: "Akshar", sans-serif;
   font-weight: 400;
   text-decoration: none;
-  color: rgb(28, 24, 87);
+  color: #5A3B5D;
   display: flex;
   align-items: center;
+}
+
+#navHandler a:hover {
+  text-shadow: 0px 0px 1px rgb(0, 0, 0);
+  transition: 0.3s;
 }
 
 .main-nav {
@@ -191,7 +207,7 @@ nav #navHandler a {
   width: 28px;
   height: 4px;
   margin: 0 auto;
-  background: #52504a;
+  background: #5A3B5D;
   transform: skew(5deg);
   transition: all 0.275s;
 }
@@ -247,7 +263,7 @@ nav #navHandler a {
 }
 
 section {
-  background-color: rgb(250, 250, 250);
+  background-color: rgb(245, 245, 245);
 }
 section #contentInImage {
   width: 40%;
@@ -293,6 +309,27 @@ section #solarImage2 {
 section #solarImage2 {
   display: none;
 }
+section a {
+  text-decoration: none;
+}
+section a h2 {
+  color: rgb(71, 53, 73);
+  padding: 20px;
+  margin: 10px 0px;
+  text-align: center;
+  background-color: rgb(230, 230, 230);
+  background: linear-gradient(90deg, rgb(230, 230, 230) 0%, rgb(245, 245, 245) 100%);
+  cursor: pointer;
+}
+section a h2 img {
+  height: 50px;
+  padding-left: 30px;
+}
+section #offer {
+  height: 800px;
+  background: url("images/theme5.png");
+  background-repeat: no-repeat;
+}
 
 @media screen and (max-width: 900px) {
   nav #navHandler,
@@ -309,6 +346,20 @@ section #solarImage2 {
 
   #mainLogo {
     margin-left: 20px;
+  }
+
+  section #contentInImage {
+    left: 25vw;
+  }
+
+  section a h2 {
+    text-align: left;
+    box-sizing: border-box;
+    padding: 10px;
+  }
+  section a h2 img {
+    padding-left: 10px;
+    height: 30px;
   }
 }
 
