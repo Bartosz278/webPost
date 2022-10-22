@@ -420,3 +420,11 @@ section {
         }
     }
 }
+
+.jsScroll {
+    opacity: 50%;
+}
+
+.jsScroll.scrolled {
+    opacity: 1;
+}

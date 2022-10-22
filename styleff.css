@@ -402,5 +402,12 @@ section #offer .offerContent #description {
     display: none;
   }
 }
+.jsScroll {
+  opacity: 50%;
+}
+
+.jsScroll.scrolled {
+  opacity: 1;
+}
 
 /*# sourceMappingURL=styleff.css.map */
