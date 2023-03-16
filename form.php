@@ -1,14 +1,14 @@
 <h1>Form connection test </h1>
-    
-    <div id="FormTest">
-        <form method="post">
-            <input type="text" name="imie" value=""><br>
-            <input type="text" name="nazwisko" value=""><br>
-            <input type="number" name="wiek" value="">
-            <input type="submit">
-        </form>
-    </div>
-    <?php 
+
+<div id="FormTest">
+    <form method="post">
+        <input type="text" name="imie" value=""><br>
+        <input type="text" name="nazwisko" value=""><br>
+        <input type="number" name="wiek" value="">
+        <input type="submit">
+    </form>
+</div>
+<?php 
     function OpenCon()
      {
      $dbhost = "localhost";
