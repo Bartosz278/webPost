@@ -1,57 +1,69 @@
 <!DOCTYPE html>
 <html lang="pl">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="reset.css">
-    <link rel="stylesheet" href="styles.css">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="styles.css" />
     <title>Webpage</title>
     <script type="text/javascript" src="script.js"></script>
+  </head>
 
-</head>
-
-<body>
-    <a href="log.php" target="_blank"><input id="addPost" type="submit" value="Dodaj wpis"></a>
+  <body>
+    <a href="log.php" target="_blank"
+      ><input id="addPost" type="submit" value="Dodaj wpis"
+    /></a>
     <div class="topNav" id="topNav">
-        <div class="navMenu" name="navMenu">
-            <a href="ff.html" name="info" class="info" target="_blank">Strona F</a>
-            <a href="form.php" class="info" target="_blank">Form</a>
-            <a href="#" class="info">Plans</a>
-            <a href="#" class="info">Contact</a>
-            <a href="#" id="closeBtn" onclick="closeNav()" class="info">&times;</a>
-        </div>
+      <div class="navMenu" name="navMenu">
+        <a href="/ageCalculator/index.html" name="info" class="info" target="_blank">age_calculator_app</a>
+        <a href="ff.html" class="info" target="_blank">Ayon_Energy_website</a>
+        <a href="https://github.com/Bartosz278/magazine-database" class="info" target="_blank">magazine_project</a>
+        <a href="https://github.com/Bartosz278" class="info" target="_blank">my_GitHub</a>
+        <a href="#" id="closeBtn" onclick="closeNav()" class="info">&times;</a>
+      </div>
     </div>
     <div class="content" id="mContent">
+      <div id="btn" onclick="openNav()">
+        <div class="openNavButton" id="btn1"></div>
+        <div class="openNavButton" id="btn2"></div>
+        <div class="openNavButton" id="btn3"></div>
+      </div>
 
+      <div class="main" id="main">
+        <h1>Age calculator app</h1>
+        <br />
+        <p>
+          age calculator app <a href="/ageCalculator/index.html" target="_blank" style="color: rgb(230, 230, 230);">link</a>
+        
+      </div>
+      <div class="main" id="main">
+        <h1>Ayon Energy website</h1>
+        <br />
 
-        <div id="btn" onclick="openNav()">
-            <div class="openNavButton" id="btn1"></div>
-            <div class="openNavButton" id="btn2"></div>
-            <div class="openNavButton" id="btn3"></div>
-        </div>
+        <p>
+          strona testowa ayon energy (work in progress)  <a href="ff.html" target="_blank" style="color: rgb(230, 230, 230);">link</a>
+        </p>
+      </div>
 
+      <div class="main" id="main">
+        <h1>magazine project</h1>
+        <br />
 
-        <div class="main" id="main">
-            <h1>Info </h1><br>
+        <p>
+          database application is a desktop application written in python. You can download it from my GitHub  <a href="https://github.com/Bartosz278/magazine-database" target="_blank" style="color: rgb(230, 230, 230);">link</a>
+        </p>
+      </div>
 
-            <p>Absolwent technikum o profilu informatycznym, rozwijam się na wielu płaszczyznach. Od kilku lat uczę się kilku języków programowania by nie zamykać się tylko na jedną ścieżkę kariery. Dzięki poznawaniu różnych technologii i dobrych wzorców projektowych jestem dobrze przystosowany do rozwiązywania problemów.
-            </p>
-            <br>
-        </div>
-        <div class="main" id="main">
-            <h1>Second post</h1><br>
+      <div class="main" id="main">
+        <h1>GitHub</h1>
+        <br />
 
-            <p>"But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder
-                of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there
-                anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes
-                laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant
-                pleasure?"
-            </p>
-        </div>
+        <p>
+          My GitHub Account  <a href="https://github.com/Bartosz278" target="_blank" style="color: rgb(230, 230, 230);">link</a>
+        </p>
+      </div>
+      
     </div>
     <p id="innerOutput"></p>
-
-</body>
-
+  </body>
 </html>

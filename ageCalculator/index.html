@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
+    <link rel="stylesheet" href="https://fonts.google.com/specimen/Poppins">
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js"></script>
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./assets/images/favicon-32x32.png"
+    />
+
+    <title>Age calculator app</title>
+
+  </head>
+  <body>
+    
+    <main>
+      <div id="input_Date">
+          <input placeholder="DD" name="day" type="number" id="day" required>
+          <input placeholder="MM" name="month" type="number" id="month" required>
+          <input placeholder="YYYY" name="year" type="number" id="year" required>
+
+      </div>
+      <hr>
+      <div id="arrow_Image" onclick="getData()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="46" height="44" viewBox="0 0 46 44"><g fill="none" stroke="#FFF" stroke-width="2"><path d="M1 22.019C8.333 21.686 23 25.616 23 44M23 44V0M45 22.019C37.667 21.686 23 25.616 23 44"/></g></svg>
+      </div>
+      
+      <div id="result">
+        <p><a id="yearOutput">- - </a>years</p>
+        <p><a id="monthOutput">- - </a>months</p>
+        <p><a id="dayOutput">- - </a>days</p>
+        <p><a id="numberOfDay"></a></p>
+      </div>
+    </main>
+  </body>
+</html>
