@@ -8,9 +8,9 @@ body {
   main {
     background-color: hsl(0, 0%, 100%);
     height: 90vh;
-    width: 70rem;
+    width: 70vw;
     margin: auto;
-    margin-top: 80px;
+    margin-top: 60px;
     max-width: 1100px;
     border-radius: 3% 3% 15% 3% / 6% 6% 30% 6%;
 
@@ -18,20 +18,20 @@ body {
       width: 80%;
       height: 70px;
       padding-top: 85px;
-      padding-left: 20px;
-      justify-content: space-evenly;
       display: flex;
+      justify-content: flex-start;
+      gap: 5%;
       margin: auto;
+
       input {
-        width: auto;
+        width: 20%;
         height: 65px;
         border-radius: 10px;
         border: 2px solid hsl(0, 0%, 86%);
         text-align: center;
         font-family: 'Poppins', sans-serif;
         font-weight: 700;
-        font-size: 16px;
-        
+        font-size: 36px;
       }
     }
     hr {
@@ -48,7 +48,7 @@ body {
       align-items: center;
       position: relative;
       top: -50px;
-      left: 950px;
+      left: 90%;
       cursor: pointer;
       svg {
         background-color: hsl(259, 100%, 65%);
@@ -58,7 +58,6 @@ body {
     }
     #result{
         width: 80%;
-        height: 100%;
         margin: 0 auto;
         display: flex;
         flex-direction: column;
@@ -67,25 +66,61 @@ body {
         font-style: italic;
         font-weight: 800;
         p{
-            font-size: 52px;
+            font-size: 82px;
             margin: 30px 0;
         }
         a{
           color:hsl(259, 100%, 65%);
+          font-size: 82px;
         }
         #numberOfDay{
           color: black;
           font-size: 18px;
         }
-        
     }
     
   }
 }
 
-@media screen and (max-width: 600px) {
-  main {
-    width: 95rem;
-    border-radius: 3% 3% 25% 3%;
+@media only screen and (max-width: 750px) {
+  body {
+    main{
+      margin-top: 20px;
+      width: 95%;
+      transition: 0.5s;
+      #arrow_Image{
+        left: 40vw;
+      }
+      #input_Date {
+        width: 100%;
+        justify-content: space-around;
+        padding-bottom: 20px;
+        padding-top: 55px;
+        input {
+          width: 25%;
+          height: 65px;
+          font-size: 26px;
+          
+        }
+      }
+      #result{
+        width: 90%;
+        
+        p{
+            font-size: 50px;
+            margin: 5px 0;
+        }
+        a{
+          font-size: 50px;
+        }
+        
+    }
+      
+    }
+  }
+}
+@media only screen and (max-height: 900px) {
+  body{
+    height: 80vh;
   }
 }
