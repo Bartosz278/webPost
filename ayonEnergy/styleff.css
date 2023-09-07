@@ -26,6 +26,8 @@ header .navIcons {
   padding: 10px;
   box-sizing: border-box;
   z-index: 1;
+  -webkit-box-shadow: 0px 9px 22px -7px rgb(66, 68, 90);
+  -moz-box-shadow: 0px 9px 22px -7px rgb(66, 68, 90);
   box-shadow: 0px 9px 22px -7px rgb(66, 68, 90);
 }
 .dropDownContent a {
@@ -325,7 +327,7 @@ section a h2 img {
 }
 section #offer {
   height: 700px;
-  background: url("images/theme6.png");
+  background: url("/images/theme6.png");
   background-repeat: no-repeat;
   display: flex;
   justify-content: flex-end;
@@ -340,6 +342,8 @@ section #offer .offerContent {
   width: 800px;
   -webkit-clip-path: polygon(100% 0%, 100% 52%, 100% 100%, 33% 100%, 0% 50%, 33% 0);
   clip-path: polygon(100% 0%, 100% 52%, 100% 100%, 33% 100%, 0% 50%, 33% 0);
+  -webkit-box-shadow: 2px 2px 32px 8px rgb(66, 68, 90);
+  -moz-box-shadow: 2px 2px 32px 8px rgb(66, 68, 90);
   box-shadow: 2px 2px 32px 8px rgb(66, 68, 90);
 }
 section #offer .offerContent h4 {
@@ -364,21 +368,25 @@ section #offer .offerContent #description {
 
 @media screen and (max-width: 900px) {
   nav #navHandler,
-  #toHide,
-  #solarImage {
+#toHide,
+#solarImage {
     display: none;
   }
+
   section #solarImage2,
-  .burger,
-  .burger-text {
+.burger,
+.burger-text {
     display: block;
   }
+
   #mainLogo {
     margin-left: 20px;
   }
+
   section #contentInImage {
     left: 25vw;
   }
+
   section a h2 {
     text-align: left;
     box-sizing: border-box;
@@ -400,4 +408,6 @@ section #offer .offerContent #description {
 
 .jsScroll.scrolled {
   opacity: 1;
-}/*# sourceMappingURL=style.css.map */
+}
+
+/*# sourceMappingURL=styleff.css.map */

@@ -1,0 +1,33 @@
+body {
+    background-color: #2d2e2b;
+}
+
+#containerWithTextarea {
+    background-color: #4c4d4a;
+    width: 80%;
+    height: 300px;
+    margin: 40px auto;
+    border-radius: 8px;
+}
+
+#textField {
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #4c4d4a;
+    height: 100%;
+    text-align: start;
+    resize: none;
+    font-size: 20px;
+    color: aliceblue;
+    border-radius: 8px;
+}
+
+#divSendButton {
+    margin: auto;
+    width: 89px;
+}
+
+#sendButton {
+    padding: 5px 25px;
+    cursor: pointer;
+}

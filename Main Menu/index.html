@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Webpage</title>
+  </head>
+
+  <body>
+    <a href="creator.html" target="_blank"
+      ><input id="addPost" type="submit" value="Dodaj wpis"
+    /></a>
+    <div class="topNav" id="topNav">
+      <div class="navMenu" name="navMenu">
+        <a href="/ageCalculator/index.html" name="info" class="info" target="_blank">age_calculator_app</a>
+        <a href="/ayonEnergy/ff.html" class="info" target="_blank">Ayon_Energy_website</a>
+        <a href="https://github.com/Bartosz278/magazine-database" class="info" target="_blank">magazine_project</a>
+        <a href="https://github.com/Bartosz278" class="info" target="_blank">my_GitHub</a>
+        <a href="#" id="closeBtn" onclick="closeNav()" class="info">&times;</a>
+      </div>
+    </div>
+    <div class="content" id="mContent">
+      <div id="btn" onclick="openNav()">
+        <div class="openNavButton" id="btn1"></div>
+        <div class="openNavButton" id="btn2"></div>
+        <div class="openNavButton" id="btn3"></div>
+      </div>
+
+      <div class="main" id="main1" onclick="window.open('/ageCalculator/index.html')">
+        <h1>Age calculator app</h1>
+        <br />
+        <p>
+          age calculator app <a href="/ageCalculator/index.html" target="_blank">link</a>
+        </p>
+      </div>
+      <div class="main" id="main2" onclick="window.open('/ayonEnergy/ff.html')">
+        <h1>Ayon Energy website</h1>
+        <br />
+
+        <p>
+          strona testowa ayon energy (work in progress)  <a href="/ayonEnergy/ff.html" target="_blank">link</a>
+        </p>
+      </div>
+
+      <div class="main" id="main3" onclick="window.open('https://github.com/Bartosz278/magazine-database')">
+        <h1>magazine project</h1>
+        <br />
+
+        <p>
+          database application is a desktop application written in python. You can download it from my GitHub  <a href="https://github.com/Bartosz278/magazine-database" target="_blank" >link</a>
+        </p>
+      </div>
+
+      <div class="main" id="main4" onclick="window.open('https://github.com/Bartosz278')">
+        <h1>GitHub</h1>
+        <br />
+
+        <p>
+          My GitHub Account  <a href="https://github.com/Bartosz278" target="_blank" >link</a>
+        </p>
+      </div>
+      
+    </div>
+    <p id="innerOutput"></p>
+  </body>
+  <script type="text/javascript" src="script.js"></script>
+</html>
+
