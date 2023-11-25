@@ -1,7 +1,4 @@
 # webPost
 
-AGE CALCULATOR:
-https://web-post.netlify.app/agecalculator/
-
-AYON:
-https://web-post.netlify.app/ayonenergy/ff
+MAIN WEBSITE:
+https://web-post.netlify.app/#
