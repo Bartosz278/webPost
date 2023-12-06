@@ -2,6 +2,7 @@ const object: HTMLElement = document.getElementById('ball');
 const object2: HTMLElement = document.getElementById('lewo');
 let valueX: number = Math.floor(Math.random()*-260)-10;
 let valueY: number = Math.floor(Math.random()*-260)-10;
+let mainWidth: number = document.getElementById("main").offsetWidth;
 let counter: number = 0;
 object.style.bottom = `${valueY}px`;
 object.style.right = `${valueX}px`;
@@ -46,7 +47,7 @@ function leftButton(){
     object.style.right = `${valueX}px`;
 }
 function rightButton(){
-    if(valueX<-270){
+    if(valueX<-mainWidth){
         stop
     }
     valueX = valueX-10;
@@ -60,7 +61,7 @@ function upButton(){
     object.style.bottom = `${valueY}px`;
 }
 function bottomButton(){
-    if(valueY<-270){
+    if(valueY<-mainWidth){
         stop
     }
     valueY = valueY-10;
@@ -85,3 +86,6 @@ document.querySelector('button').addEventListener('click',()=>{
     counter = 0;
 })
 
+console.log(mainWidth);
+
+console.log('test1');
