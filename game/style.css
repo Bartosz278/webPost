@@ -55,3 +55,9 @@ canvas {
     padding: 5px;
     border-radius: 5px;
 }
+
+#info{
+    position: absolute;
+    font-size: 32px;
+    opacity: 50%;
+}
