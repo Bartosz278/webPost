@@ -43,42 +43,54 @@ export function updateInventory() {
     });
 }
 export let cursorItems;
+export function setCursorItems(items) {
+    cursorItems = items;
+}
+export function getCursorItems() {
+    return cursorItems;
+}
 export let isHoldingItem = false;
+export function setIsHoldingItem(value) {
+    isHoldingItem = value;
+}
+export function getIsHoldingItem() {
+    return isHoldingItem;
+}
 export function useItem(item, slot, inventory) {
-    if (isHoldingItem == false && inventory[slot.id] != null) {
-        cursorItems = inventory[slot.id];
+    if (getIsHoldingItem() == false && inventory[slot.id] != null) {
+        setCursorItems(inventory[slot.id]);
         document.getElementById(`${slot.id}`).textContent = '';
         slot.style.backgroundImage = null;
         inventory[slot.id] = null;
-        isHoldingItem = true;
+        setIsHoldingItem(true);
         player.canPlace = cursorItems.canPlace;
         updateInventory();
         return true;
     }
-    if (isHoldingItem == true && inventory[slot.id] == null) {
+    if (getIsHoldingItem() == true && inventory[slot.id] == null && cursorItems.count > 0) {
         document.getElementById(`${slot.id}`).textContent = cursorItems.count.toString();
         slot.style.backgroundImage = `url("assets/eqIcons/${cursorItems.name}Eq.png")`;
-        inventory[slot.id] = cursorItems;
-        isHoldingItem = false;
+        inventory[slot.id] = getCursorItems();
+        setIsHoldingItem(false);
         updateInventory();
         return false;
     }
-    if (isHoldingItem == true && inventory[slot.id] != null && inventory[slot.id].name == cursorItems.name) {
-        inventory[slot.id].count = inventory[slot.id].count + cursorItems.count;
-        isHoldingItem = false;
+    if (getIsHoldingItem() == true && inventory[slot.id] != null && inventory[slot.id].name == cursorItems.name && cursorItems.count > 0) {
+        inventory[slot.id].count = inventory[slot.id].count + getCursorItems().count;
+        setIsHoldingItem(false);
         updateInventory();
         return false;
     }
-    if (isHoldingItem == true && inventory[slot.id] != null && inventory[slot.id].name != cursorItems.name) {
-        let temp = cursorItems;
-        cursorItems = inventory[slot.id];
+    if (getIsHoldingItem() == true && inventory[slot.id] != null && inventory[slot.id].name != cursorItems.name && cursorItems.count > 0) {
+        let temp = getCursorItems();
+        setCursorItems(inventory[slot.id]);
         document.getElementById(`${slot.id}`).textContent = '';
         slot.style.backgroundImage = null;
         inventory[slot.id] = null;
         document.getElementById(`${slot.id}`).textContent = temp.count.toString();
         slot.style.backgroundImage = `url("assets/eqIcons/${temp.name}Eq.png")`;
         inventory[slot.id] = temp;
-        isHoldingItem = true;
+        setIsHoldingItem(true);
         updateInventory();
         return true;
     }

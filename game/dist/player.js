@@ -1,5 +1,5 @@
 export class Player {
-    constructor(ctx, img, canvas, isCollidingWithObstacle, interactiveObstacles, showCollectInfo, collectItem, updateInventory, cursorItems) {
+    constructor(ctx, img, canvas, isCollidingWithObstacle, interactiveObstacles, showCollectInfo, collectItem, updateInventory, setIsHoldingItem, setCursorItems, getCursorItems, cursorItems) {
         this.ctx = ctx;
         this.img = img;
         this.canvas = canvas;
@@ -8,6 +8,9 @@ export class Player {
         this.showCollectInfo = showCollectInfo;
         this.collectItem = collectItem;
         this.updateInventory = updateInventory;
+        this.setIsHoldingItem = setIsHoldingItem;
+        this.setCursorItems = setCursorItems;
+        this.getCursorItems = getCursorItems;
         this.x = canvas.width / 2;
         this.y = canvas.height / 2;
         this.mouseX = 0;
@@ -31,36 +34,38 @@ export class Player {
         }
     }
     drawBuildRange() {
-        if (this.isHoldingItem == true && this.canPlace == true) {
+        if (this.isHoldingItem == true && this.getCursorItems().canPlace == true) {
             this.ctx.beginPath();
             this.ctx.arc(this.x + 15, this.y + 15, 100, 0, 2 * Math.PI);
             this.ctx.stroke();
         }
     }
     build(cursorItems) {
-        if (this.isHoldingItem == true && this.canPlace == true) {
+        if (this.isHoldingItem == true && cursorItems.canPlace == true) {
             let distance = Math.sqrt(Math.pow(this.mouseX - this.x - 15, 2) + Math.pow(this.mouseY - this.y - 15, 2));
-            this.cursorItems = cursorItems;
+            this.cursorItems = this.getCursorItems();
             this.cursorImage.src = `assets/eqIcons/${this.cursorItems.name}Eq.png`;
-            if (distance <= 100 && this.cursorItems.count > 0) {
+            if (distance <= 100 && this.getCursorItems().count > 0) {
                 this.cursorItems.count--;
                 const obstacle = {
-                    name: this.cursorItems.name,
+                    name: this.getCursorItems().name,
                     x: this.mouseX - 15,
                     y: this.mouseY - 15,
                     size: 40,
-                    digTime: this.cursorItems.digTime,
-                    interactive: this.cursorItems.interactive,
+                    digTime: this.getCursorItems().digTime,
+                    interactive: this.getCursorItems().interactive,
                     count: 0,
                     image: new Image(),
-                    canPlace: this.cursorItems.canPlace,
+                    canPlace: this.getCursorItems().canPlace,
                 };
                 obstacle.image.src = `assets/${this.cursorItems.name}.png`;
                 this.interactiveObstacles.push(obstacle);
             }
-            if (this.cursorItems.count == 0) {
+            if (cursorItems.count == 0 || this.getCursorItems().count == 0) {
                 this.isHoldingItem = false;
+                this.setIsHoldingItem(false);
                 this.cursorItems = null;
+                cursorItems = null;
             }
             this.updateInventory();
         }

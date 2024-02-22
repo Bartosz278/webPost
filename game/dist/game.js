@@ -1,6 +1,6 @@
 import { Player } from "./player.js";
 import { interactiveObstacles, createObstacles, drawObstacles } from "./objects.js";
-import { collectItem, updateInventory, isHoldingItem, cursorItems } from "./inventory.js";
+import { collectItem, updateInventory, isHoldingItem, cursorItems, setIsHoldingItem, setCursorItems, getCursorItems } from "./inventory.js";
 import { checkCollectibleProximity, showCollectInfo, isCollidingWithObstacle } from "./utils.js";
 let canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
@@ -15,7 +15,7 @@ canvas.width = window.innerWidth * 0.9;
 canvas.height = window.innerHeight * 0.85;
 const playerImg = new Image();
 playerImg.src = "assets/character.png";
-export let player = new Player(ctx, playerImg, canvas, isCollidingWithObstacle, interactiveObstacles, showCollectInfo, collectItem, updateInventory, cursorItems);
+export let player = new Player(ctx, playerImg, canvas, isCollidingWithObstacle, interactiveObstacles, showCollectInfo, collectItem, updateInventory, setIsHoldingItem, setCursorItems, getCursorItems, cursorItems);
 function clearCanvas() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
@@ -25,7 +25,7 @@ function updateGame() {
     player.drawPlayer();
     player.drawBuildRange();
     player.isHoldingItem = isHoldingItem;
-    player.cursorItems = cursorItems;
+    player.cursorItems = getCursorItems();
     drawObstacles(ctx);
     checkCollectibleProximity(interactiveObstacles, player);
     requestAnimationFrame(updateGame);
@@ -41,12 +41,10 @@ document.addEventListener("keyup", (event) => {
 canvas.addEventListener('mousemove', (event) => {
     player.mouseX = event.offsetX;
     player.mouseY = event.offsetY;
-    // console.log(player.mouseX);
-    // console.log(player.mouseY);
 });
 canvas.addEventListener('mousedown', (event) => {
-    player.build(cursorItems);
+    player.build(getCursorItems());
 });
-createObstacles(canvas, 15);
+createObstacles(canvas, 25);
 updateInventory();
 updateGame();
