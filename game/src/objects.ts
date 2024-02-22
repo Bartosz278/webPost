@@ -7,6 +7,7 @@ export const interactiveObstacles: {
   interactive: boolean,
   count: number,
   image: HTMLImageElement ,
+  canPlace: boolean,
 }[] = [];
 import { Block, blocks } from './blocks.js';
 
@@ -33,6 +34,7 @@ export function createObstacles(canvas: HTMLCanvasElement, quantity: number): vo
         interactive: chosenBlock.interactive,
         count: 0,
         image: new Image(),
+        canPlace: chosenBlock.canPlace,
       };
       obstacle.image.src = `assets/${obstacle.name}.png`
       interactiveObstacles.push(obstacle);

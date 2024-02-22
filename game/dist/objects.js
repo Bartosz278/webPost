@@ -22,6 +22,7 @@ export function createObstacles(canvas, quantity) {
                 interactive: chosenBlock.interactive,
                 count: 0,
                 image: new Image(),
+                canPlace: chosenBlock.canPlace,
             };
             obstacle.image.src = `assets/${obstacle.name}.png`;
             interactiveObstacles.push(obstacle);
