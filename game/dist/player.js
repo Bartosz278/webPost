@@ -22,15 +22,17 @@ export class Player {
         this.isHoldingItem = false;
         this.canPlace = false;
         this.cursorImage = new Image();
-        this.distance = Math.sqrt(Math.pow(this.mouseX - this.x - 15, 2) + Math.pow(this.mouseY - this.y - 15, 2));
+        this.distance = Math.sqrt(Math.pow(this.mouseX - this.x - 15, 2) +
+            Math.pow(this.mouseY - this.y - 15, 2));
+        this.isCraftingOpen = false;
     }
     drawPlayer() {
         this.ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
     }
-    drawHeldItem() {
-        this.cursorImage.src = `assets/eqIcons/wallEq.png`;
+    drawHeldItem(ctx, cursorItems) {
+        this.cursorImage.src = `assets/eqIcons/${cursorItems.name}Eq.webp`;
         if (this.isHoldingItem == true && this.canPlace == true) {
-            this.ctx.drawImage(this.cursorImage, this.mouseX, this.mouseY);
+            ctx.drawImage(this.cursorImage, this.mouseX - this.cursorItems.width / 2, this.mouseY - this.cursorItems.height / 2);
         }
     }
     drawBuildRange() {
@@ -38,30 +40,33 @@ export class Player {
             this.ctx.beginPath();
             this.ctx.arc(this.x + 15, this.y + 15, 100, 0, 2 * Math.PI);
             this.ctx.stroke();
+            this.drawHeldItem(this.ctx, this.cursorItems);
         }
     }
     build(cursorItems) {
+        let distance = Math.sqrt(Math.pow(this.mouseX - this.x - 15, 2) +
+            Math.pow(this.mouseY - this.y - 15, 2));
         if (this.isHoldingItem == true && cursorItems.canPlace == true) {
-            let distance = Math.sqrt(Math.pow(this.mouseX - this.x - 15, 2) + Math.pow(this.mouseY - this.y - 15, 2));
             this.cursorItems = this.getCursorItems();
-            this.cursorImage.src = `assets/eqIcons/${this.cursorItems.name}Eq.png`;
+            this.cursorImage.src = `assets/eqIcons/${this.cursorItems.name}Eq.webp`;
             if (distance <= 100 && this.getCursorItems().count > 0) {
                 this.cursorItems.count--;
                 const obstacle = {
                     name: this.getCursorItems().name,
                     x: this.mouseX - 15,
                     y: this.mouseY - 15,
-                    size: 40,
+                    height: this.cursorItems.height,
+                    width: this.cursorItems.width,
                     digTime: this.getCursorItems().digTime,
                     interactive: this.getCursorItems().interactive,
                     count: 0,
                     image: new Image(),
-                    canPlace: this.getCursorItems().canPlace,
+                    canPlace: this.getCursorItems().canPlace
                 };
-                obstacle.image.src = `assets/${this.cursorItems.name}.png`;
+                obstacle.image.src = `assets/${this.cursorItems.name}.webp`;
                 this.interactiveObstacles.push(obstacle);
             }
-            if (cursorItems.count == 0 || this.getCursorItems().count == 0) {
+            if (cursorItems.count == 0) {
                 this.isHoldingItem = false;
                 this.setIsHoldingItem(false);
                 this.cursorItems = null;
@@ -69,31 +74,29 @@ export class Player {
             }
             this.updateInventory();
         }
-        if (this.isHoldingItem == true && this.distance > 100) {
-            this.showCollectInfo("infoBox", true, "Cannot place here", this.mouseX, this.mouseY);
-            setTimeout(() => { this.showCollectInfo("infoBox", false, "", 1, 2); }, 1000);
+        if (this.isHoldingItem == true && distance > 100) {
+            this.showCollectInfo('infoBox', true, 'Cannot place here', this.mouseX, this.mouseY);
+            setTimeout(() => {
+                this.showCollectInfo('infoBox', false, '', 1, 2);
+            }, 1000);
         }
     }
     move(keysPressed) {
         let newX = this.x;
         let newY = this.y;
-        if (keysPressed["w"]) {
+        if (keysPressed['w']) {
             newY -= this.speed;
         }
-        if (keysPressed["s"]) {
+        if (keysPressed['s']) {
             newY += this.speed;
         }
-        if (keysPressed["a"]) {
+        if (keysPressed['a']) {
             newX -= this.speed;
         }
-        if (keysPressed["d"]) {
+        if (keysPressed['d']) {
             newX += this.speed;
         }
         if (keysPressed['g']) {
-            this.drawBuildRange();
-            console.log(this.mouseX);
-            console.log(this.mouseY);
-            console.log(this.interactiveObstacles);
         }
         if (!this.isCollidingWithObstacle(this.interactiveObstacles, newX, newY)) {
             this.x = newX;
@@ -109,11 +112,11 @@ export class Player {
             let distance = Math.sqrt(Math.pow(this.x - obstacle.x, 2) + Math.pow(this.y - obstacle.y, 2));
             if (distance < 50) {
                 this.isCollecting = true;
-                this.showCollectInfo("infoBox", true, "Collecting...", this.x + 20, this.y - 20);
+                this.showCollectInfo('infoBox', true, 'Collecting...', this.x + 20, this.y - 20);
                 setTimeout(() => {
                     this.collectItem(i);
                     this.isCollecting = false;
-                    this.showCollectInfo("infoBox", false, "x", this.x + 20, this.y - 20);
+                    this.showCollectInfo('infoBox', false, 'x', this.x + 20, this.y - 20);
                 }, obstacle.digTime);
                 break;
             }

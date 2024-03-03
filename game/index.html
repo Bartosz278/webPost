@@ -1,20 +1,23 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<head>
+  <head>
     <title>Simple game</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <div id="info"><h1>Still in progress...</h1></div>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body id="dragzone">
+    <div id="craftingWindow">
+      <span id="closeCraftingButton">&#10006;</span>
+    </div>
     <canvas id="gameCanvas"></canvas>
-    <div id="inventory"></div>
+    <div id="bottomBar">
+      <div id="crafting"><img src="assets/crafting.webp" /></div>
+      <div id="inventory"></div>
+    </div>
     <div id="infoBox">space to collect</div>
     <div id="controls">
-        <p>w,s,a,d - moving</p>
-        <p>space - interaction</p>
-
+      <p>w,s,a,d - moving</p>
+      <p>space - collect</p>
     </div>
-
-    <script type="module" src="./dist/game.js"></script>
-</body>
+  </body>
+  <script type="module" src="./dist/game.js"></script>
 </html>
