@@ -42,7 +42,6 @@ export function updateInventory() {
             itemCount.textContent = item.count.toString();
             slot.appendChild(itemCount);
             slot.style.backgroundImage = `url("assets/eqIcons/${item.name}Eq.webp")`;
-            // slot.style.backgroundRepeat = 'no-repeat';
         }
         inventoryEl.appendChild(slot);
     });

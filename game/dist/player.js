@@ -1,3 +1,7 @@
+import { interactiveObstacles } from './objects.js';
+//prettier-ignore
+import { inventory } from './inventory.js';
+import { craftableItems } from './items-in-crafting.js';
 export class Player {
     constructor(ctx, img, canvas, isCollidingWithObstacle, interactiveObstacles, showCollectInfo, collectItem, updateInventory, setIsHoldingItem, setCursorItems, getCursorItems, cursorItems) {
         this.ctx = ctx;
@@ -25,6 +29,8 @@ export class Player {
         this.distance = Math.sqrt(Math.pow(this.mouseX - this.x - 15, 2) +
             Math.pow(this.mouseY - this.y - 15, 2));
         this.isCraftingOpen = false;
+        this.day = 1;
+        this.functionIsExecuted = false;
     }
     drawPlayer() {
         this.ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
@@ -61,7 +67,10 @@ export class Player {
                     interactive: this.getCursorItems().interactive,
                     count: 0,
                     image: new Image(),
-                    canPlace: this.getCursorItems().canPlace
+                    canPlace: this.getCursorItems().canPlace,
+                    canCollect: this.getCursorItems().canCollect,
+                    method: this.getCursorItems().method,
+                    type: this.getCursorItems().type
                 };
                 obstacle.image.src = `assets/${this.cursorItems.name}.webp`;
                 this.interactiveObstacles.push(obstacle);
@@ -97,6 +106,34 @@ export class Player {
             newX += this.speed;
         }
         if (keysPressed['g']) {
+            inventory[9] = {
+                name: craftableItems[1].name,
+                x: 0,
+                y: 0,
+                height: craftableItems[1].height,
+                width: craftableItems[1].width,
+                digTime: craftableItems[1].diggingTime,
+                interactive: craftableItems[1].interactive,
+                count: 1,
+                canPlace: craftableItems[1].canPlace,
+                canCollect: craftableItems[1].canCollect,
+                method: craftableItems[1].method,
+                type: craftableItems[1].type
+            };
+            console.log(interactiveObstacles);
+        }
+        if (keysPressed['e'] && !this.functionIsExecuted) {
+            if (this.closestItem.interactive == true) {
+                this.closestItem.method();
+                this.day++;
+                this.functionIsExecuted = true;
+            }
+        }
+        if (newY - this.speed <= 0 ||
+            newY + this.speed >= this.canvas.height - 30 ||
+            newX - this.speed <= 0 ||
+            newX + this.speed >= this.canvas.width - 30) {
+            return;
         }
         if (!this.isCollidingWithObstacle(this.interactiveObstacles, newX, newY)) {
             this.x = newX;
@@ -110,7 +147,7 @@ export class Player {
         for (let i = this.interactiveObstacles.length - 1; i >= 0; i--) {
             let obstacle = this.interactiveObstacles[i];
             let distance = Math.sqrt(Math.pow(this.x - obstacle.x, 2) + Math.pow(this.y - obstacle.y, 2));
-            if (distance < 50) {
+            if (distance < 50 && obstacle.canCollect == true) {
                 this.isCollecting = true;
                 this.showCollectInfo('infoBox', true, 'Collecting...', this.x + 20, this.y - 20);
                 setTimeout(() => {

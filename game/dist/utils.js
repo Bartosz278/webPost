@@ -1,4 +1,12 @@
-const interactiveObstacles = [];
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 export function showCollectInfo(elementId, show, text, x, y) {
     let infoBox = document.getElementById(elementId);
     if (show) {
@@ -11,8 +19,11 @@ export function showCollectInfo(elementId, show, text, x, y) {
         infoBox.style.display = 'none';
     }
 }
-export function isCollidingWithObstacle(interactiveObstacles, newX, newY) {
+export function isCollidingWithObstacle(interactiveObstacles, newX, newY, collidingType) {
     return interactiveObstacles.some((obstacle) => {
+        if (obstacle.type === collidingType) {
+            return false;
+        }
         return (newX < obstacle.x + obstacle.width &&
             newX + this.width > obstacle.x &&
             newY < obstacle.y + obstacle.height &&
@@ -20,15 +31,19 @@ export function isCollidingWithObstacle(interactiveObstacles, newX, newY) {
     });
 }
 export function checkCollectibleProximity(interactiveObstacles, player) {
-    let isNearCollectible = false;
+    let nearestCollectible = null;
+    let nearestDistance = Infinity;
     interactiveObstacles.forEach((obstacle) => {
-        let distance = Math.sqrt(Math.pow((player.x - obstacle.x), 2) + Math.pow((player.y - obstacle.y), 2));
+        let distance = Math.sqrt(Math.pow((player.x + 15 - obstacle.x - obstacle.width / 2), 2) +
+            Math.pow((player.y + 15 - obstacle.y - obstacle.height / 2), 2));
+        if (distance < nearestDistance) {
+            nearestDistance = distance;
+            nearestCollectible = obstacle;
+        }
         if (distance < 50) {
-            isNearCollectible = true;
+            player.closestItem = nearestCollectible;
         }
     });
-    if (!isNearCollectible) {
-    }
 }
 export const dragElement = (element, dragzone) => {
     let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
@@ -56,3 +71,16 @@ export const dragElement = (element, dragzone) => {
     };
     dragzone.onmousedown = dragMouseDown;
 };
+function delay(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+}
+export function destroyObstacle() {
+    return __awaiter(this, void 0, void 0, function* () {
+        let indexDoUsuniecia = this.interactiveObstacles.findIndex((obiekt) => obiekt.x === this.closestItem.x);
+        if (indexDoUsuniecia !== -1) {
+            setTimeout(() => {
+                this.interactiveObstacles.splice(indexDoUsuniecia, 1);
+            }, this.closestItem.diggingTime / this.strength);
+        }
+    });
+}

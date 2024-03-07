@@ -8,6 +8,33 @@ body {
   background-color: rgb(0, 110, 68);
   user-select: none;
 }
+#night {
+  opacity: 0%;
+  z-index: -1;
+  transition: 4s;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000;
+  background: radial-gradient(
+    circle,
+    rgba(0, 0, 0, 0.6942471988795518) 60%,
+    rgba(0, 0, 0, 1) 100%
+  );
+}
+#night2 {
+  opacity: 0%;
+  z-index: -1;
+  transition: 4s;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.9848074229691877) 100%,
+    rgb(59, 57, 57) 90%
+  );
+}
 canvas {
   border: 1px solid #000000;
   background-image: url('assets/grass.png');
@@ -50,6 +77,12 @@ canvas {
   display: none;
   font-size: 14px;
   color: #000;
+}
+#days {
+  position: absolute;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 56px;
+  font-weight: 1000;
 }
 #collectInfo {
   display: none;
@@ -106,4 +139,16 @@ canvas {
 .slot {
   background-repeat: no-repeat;
   background-position: center;
+}
+
+#controls {
+  position: absolute;
+  bottom: 0px;
+  left: 20px;
+  background-color: #216420;
+  border-radius: 10px;
+  border: 1px solid black;
+}
+#controls p {
+  margin: 4px;
 }

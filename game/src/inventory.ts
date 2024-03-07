@@ -12,6 +12,9 @@ export interface Item {
   interactive: boolean;
   count: number;
   canPlace: boolean;
+  canCollect?: boolean;
+  method?: () => void;
+  type: string;
 }
 
 export const inventory: Item[] = Array(10).fill(null);
@@ -57,7 +60,6 @@ export function updateInventory(): void {
       itemCount.textContent = item.count.toString();
       slot.appendChild(itemCount);
       slot.style.backgroundImage = `url("assets/eqIcons/${item.name}Eq.webp")`;
-      // slot.style.backgroundRepeat = 'no-repeat';
     }
     inventoryEl.appendChild(slot);
   });

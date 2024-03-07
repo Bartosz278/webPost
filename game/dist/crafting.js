@@ -29,41 +29,15 @@ craftableItems.forEach((item) => {
     itemElement.addEventListener('click', () => craftItem(item));
     craftingWindow.appendChild(itemElement);
 });
-// function addItemToInventory(craftableItem: CraftableItem) {
-//   let added = false;
-//   for (let i = 0; i < inventory.length; i++) {
-//     if (inventory[i] === null) {
-//       inventory[i] = {
-//         name: craftableItem.name,
-//         x: 0,
-//         y: 0,
-//         height: craftableItem.height,
-//         width: craftableItem.width,
-//         digTime: craftableItem.diggingTime,
-//         interactive: craftableItem.interactive,
-//         count: 1,
-//         canPlace: craftableItem.canPlace
-//       };
-//       added = true;
-//       break;
-//     }
-//   }
-//   if (!added) {
-//     alert('Inventory is full!');
-//   }
-//   updateInventory();
-// }
 function addItemToInventory(craftableItem) {
     let added = false;
-    // Najpierw sprawdź, czy przedmiot już istnieje w inwentarzu
     for (let i = 0; i < inventory.length; i++) {
         if (inventory[i] && inventory[i].name === craftableItem.name) {
-            inventory[i].count += 1; // Zwiększ ilość, jeśli przedmiot już istnieje
+            inventory[i].count += 1;
             added = true;
             break;
         }
     }
-    // Jeśli przedmiot nie istnieje, znajdź pierwsze wolne miejsce i dodaj nowy element
     if (!added) {
         for (let i = 0; i < inventory.length; i++) {
             if (inventory[i] === null) {
@@ -75,8 +49,9 @@ function addItemToInventory(craftableItem) {
                     width: craftableItem.width,
                     digTime: craftableItem.diggingTime,
                     interactive: craftableItem.interactive,
-                    count: 1, // Dodajemy przedmiot z ilością 1
-                    canPlace: craftableItem.canPlace
+                    count: 1,
+                    canPlace: craftableItem.canPlace,
+                    method: craftableItem.method
                 };
                 added = true;
                 break;

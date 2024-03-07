@@ -1,7 +1,7 @@
-import { player } from './game';
-import { Player } from './player';
-
-const interactiveObstacles: any[] = [];
+import { Enemy } from './enemy';
+import { enemies } from './game';
+import { interactiveObstacles } from './objects';
+import { Obstacle } from './player';
 
 export function showCollectInfo(
   elementId: string,
@@ -24,9 +24,13 @@ export function showCollectInfo(
 export function isCollidingWithObstacle(
   interactiveObstacles: any[],
   newX: number,
-  newY: number
+  newY: number,
+  collidingType?: string
 ): boolean {
   return interactiveObstacles.some((obstacle) => {
+    if (obstacle.type === collidingType) {
+      return false;
+    }
     return (
       newX < obstacle.x + obstacle.width &&
       newX + this.width > obstacle.x &&
@@ -39,18 +43,23 @@ export function isCollidingWithObstacle(
 export function checkCollectibleProximity(
   interactiveObstacles: any[],
   player: any
-): void {
-  let isNearCollectible = false;
+): any {
+  let nearestCollectible = null;
+  let nearestDistance = Infinity;
+
   interactiveObstacles.forEach((obstacle) => {
     let distance = Math.sqrt(
-      (player.x - obstacle.x) ** 2 + (player.y - obstacle.y) ** 2
+      (player.x + 15 - obstacle.x - obstacle.width / 2) ** 2 +
+        (player.y + 15 - obstacle.y - obstacle.height / 2) ** 2
     );
+    if (distance < nearestDistance) {
+      nearestDistance = distance;
+      nearestCollectible = obstacle;
+    }
     if (distance < 50) {
-      isNearCollectible = true;
+      player.closestItem = nearestCollectible;
     }
   });
-  if (!isNearCollectible) {
-  }
 }
 
 export const dragElement = (element, dragzone) => {
@@ -82,3 +91,17 @@ export const dragElement = (element, dragzone) => {
   };
   dragzone.onmousedown = dragMouseDown;
 };
+function delay(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+export async function destroyObstacle() {
+  let indexDoUsuniecia = this.interactiveObstacles.findIndex(
+    (obiekt: Obstacle) => obiekt.x === this.closestItem.x
+  );
+
+  if (indexDoUsuniecia !== -1) {
+    setTimeout(() => {
+      this.interactiveObstacles.splice(indexDoUsuniecia, 1);
+    }, this.closestItem.diggingTime / this.strength);
+  }
+}
