@@ -152,3 +152,50 @@ canvas {
 #controls p {
   margin: 4px;
 }
+#hp {
+  border: 1px solid black;
+  width: 150px;
+  background-color: white;
+  height: 30px;
+  border-radius: 4px;
+  margin: 5px;
+  position: absolute;
+  bottom: 20px;
+  left: 160px;
+}
+#hp div {
+  width: 150px;
+  height: 30px;
+  background-color: red;
+  font-size: 20px;
+}
+
+#gameOver {
+  display: none;
+  transition: 1s;
+  position: absolute;
+  top: 20%;
+  width: 100vw;
+  height: 400px;
+  background-color: gray;
+  opacity: 85%;
+  font-size: 64px;
+  color: white;
+  font-family: monospace;
+  letter-spacing: 10px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+#gameOver p {
+  width: 100%;
+  padding-left: 10%;
+}
+#gameOver button {
+  padding: 10px;
+  width: 130px;
+  border-radius: 6px;
+  font-size: 20px;
+  font-weight: 600;
+  cursor: pointer;
+}

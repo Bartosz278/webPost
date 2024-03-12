@@ -1,0 +1,40 @@
+#include <iostream>
+#include <cmath>
+#include <limits>
+
+int main() {
+    double A, B, C;
+
+    std::cout << "Wprowadz wspolczynniki rownania kwadratowego Ax^2 + Bx + C = 0" << std::endl;
+
+    std::cout << "Wprowadz A (A nie moze byc rowne 0): ";
+    while(!(std::cin >> A) || A == 0) {
+        std::cout << "Bledne dane. Wprowadz liczbe jeszcze raz: "<< std::endl;
+    }
+
+    std::cout << "Wprowadz B: ";
+    while(!(std::cin >> B)) {
+        std::cout << "Bledne dane. Wprowadz liczbe jeszcze raz: "<< std::endl;
+    }
+
+    std::cout << "Wprowadz C: ";
+    while(!(std::cin >> C)) {
+        std::cout << "Bledne dane. Wprowadz liczbe jeszcze raz: "<<std::endl;
+    }
+
+    double delta = B*B - 4*A*C;
+    double x1, x2;
+
+    if (delta > 0) {
+        x1 = (-B - std::sqrt(delta)) / (2*A);
+        x2 = (-B + std::sqrt(delta)) / (2*A);
+        std::cout << "Rownanie ma dwa rozne pierwiastki rzeczywiste: x1 = " << x1 << ", x2 = " << x2 << std::endl;
+    } else if (delta == 0) {
+        x1 = -B / (2*A);
+        std::cout << "Rownanie ma jeden podwojny pierwiastek rzeczywisty: x1 = " << x1 << std::endl;
+    } else {
+        std::cout << "Rownanie nie ma pierwiastkow rzeczywistych." << std::endl;
+    }
+
+    return 0;
+}

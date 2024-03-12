@@ -7,6 +7,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+import { player, gameOverDiv, updateGame } from './game.js';
+//prettier-ignore
+import { interactiveObstacles, createObstacles } from './objects.js';
+//prettier-ignore
+import { collectItem, updateInventory, inventory, setIsHoldingItem, setCursorItems, getCursorItems } from './inventory.js';
+//prettier-ignore
+import { enemies } from './enemy.js';
 export function showCollectInfo(elementId, show, text, x, y) {
     let infoBox = document.getElementById(elementId);
     if (show) {
@@ -76,11 +83,65 @@ function delay(ms) {
 }
 export function destroyObstacle() {
     return __awaiter(this, void 0, void 0, function* () {
-        let indexDoUsuniecia = this.interactiveObstacles.findIndex((obiekt) => obiekt.x === this.closestItem.x);
-        if (indexDoUsuniecia !== -1) {
-            setTimeout(() => {
-                this.interactiveObstacles.splice(indexDoUsuniecia, 1);
-            }, this.closestItem.diggingTime / this.strength);
+        let indexDoUsuniecia = this.interactiveObstacles.findIndex((obstacle) => obstacle.x == this.closestItem.x);
+        if (indexDoUsuniecia != -1 && this.canDestroy == true) {
+            this.canDestroy = false;
+            yield delay(this.closestItem.digTime / this.strength);
+            this.interactiveObstacles.splice(indexDoUsuniecia, 1);
+            yield delay(1000);
+            this.canDestroy = true;
         }
+    });
+}
+export function updateHP(damge) {
+    let hp = document.getElementById('hpWidth');
+    hp.innerHTML = `${player.hp}%`;
+    hp.style.width = `${player.hp * 1.5 - (damge / player.hp) * 100}px`;
+    if (player.hp == 0) {
+        hp.style.width = '0px';
+    }
+}
+export function startNewGame() {
+    return __awaiter(this, void 0, void 0, function* () {
+        gameOverDiv.style.display = 'none';
+        document.getElementById('night').style.transition = '4s';
+        document.getElementById('night2').style.transition = '4s';
+        document.getElementById('night').style.opacity = '0%';
+        document.getElementById('night2').style.opacity = '0%';
+        document.getElementById('night').style.zIndex = '-1';
+        document.getElementById('night2').style.zIndex = '-1';
+        player.isCollidingWithObstacle = isCollidingWithObstacle;
+        player.interactiveObstacles = interactiveObstacles;
+        player.showCollectInfo = showCollectInfo;
+        player.collectItem = collectItem;
+        player.updateInventory = updateInventory;
+        player.setIsHoldingItem = setIsHoldingItem;
+        player.setCursorItems = setCursorItems;
+        player.getCursorItems = getCursorItems;
+        player.x = player.canvas.width / 2;
+        player.y = player.canvas.height / 2;
+        player.mouseX = 0;
+        player.mouseY = 0;
+        player.width = 30;
+        player.height = 30;
+        player.speed = 2.2;
+        player.isCollecting = false;
+        player.isHoldingItem = false;
+        player.canPlace = false;
+        player.cursorImage = new Image();
+        player.distance = Math.sqrt(Math.pow(player.mouseX - player.x - 15, 2) +
+            Math.pow(player.mouseY - player.y - 15, 2));
+        player.isCraftingOpen = false;
+        player.day = 1;
+        player.functionIsExecuted = false;
+        player.hp = 100;
+        player.getDamage = false;
+        player.interactiveObstacles.splice(0, player.interactiveObstacles.length);
+        enemies.splice(0, enemies.length);
+        inventory.fill(null);
+        updateHP(0);
+        updateInventory();
+        createObstacles(30);
+        updateGame();
     });
 }

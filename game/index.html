@@ -2,6 +2,7 @@
 <html>
   <head>
     <title>Simple game</title>
+    <link rel="stylesheet" href="reset.css" />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body id="dragzone">
@@ -12,16 +13,24 @@
     <div id="bottomBar">
       <div id="crafting"><img src="assets/crafting.webp" /></div>
       <div id="inventory"></div>
+      <div id="hp"><div id="hpWidth"></div></div>
     </div>
     <div id="infoBox">space to collect</div>
     <h1 id="days"></h1>
     <div id="controls">
       <p>w,s,a,d - moving</p>
-      <p>space - collect</p>
+      <p>q - collect</p>
       <p>e - interaction</p>
+      <p>space - fight</p>
     </div>
+
     <div id="night" class="nightEffect"></div>
     <div id="night2" class="nightEffect"></div>
+    <div id="gameOver">
+      <p>You died</p>
+      <p>Start new game?</p>
+      <button id="restartGame">Start</button>
+    </div>
   </body>
   <script type="module" src="./dist/game.js"></script>
 </html>

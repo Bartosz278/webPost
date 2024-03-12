@@ -38,7 +38,7 @@ export function createObstacles(quantity: number, neededBlock?: Block): void {
         y: Math.random() * (window.innerHeight * 0.9 - 20),
         height: chosenBlock.height,
         width: chosenBlock.width,
-        digTime: chosenBlock.diggingTime,
+        digTime: chosenBlock.digTime,
         interactive: chosenBlock.interactive,
         count: 0,
         image: new Image(),

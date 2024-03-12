@@ -3,6 +3,8 @@ import { interactiveObstacles } from './objects.js';
 import {Item,cursorItems,inventory,isHoldingItem,useItem,setIsHoldingItem,getIsHoldingItem} from './inventory.js';
 import { checkCollectibleProximity } from './utils.js';
 import { craftableItems } from './items-in-crafting.js';
+import { closestEnemies, player } from './game.js';
+import { Enemy, enemies } from './enemy.js';
 export interface Obstacle {
   name: string;
   x: number;
@@ -58,6 +60,10 @@ export class Player {
   closestItem: any;
   day: number;
   functionIsExecuted: boolean;
+  hp: number;
+  getDamage: boolean;
+  closestEnemies: Enemy[];
+  canAttack: boolean;
 
   constructor(
     ctx: CanvasRenderingContext2D,
@@ -112,6 +118,9 @@ export class Player {
     this.isCraftingOpen = false;
     this.day = 1;
     this.functionIsExecuted = false;
+    this.hp = 100;
+    this.getDamage = false;
+    this.canAttack = true;
   }
 
   drawPlayer(): void {
@@ -141,7 +150,11 @@ export class Player {
       Math.pow(this.mouseX - this.x - 15, 2) +
         Math.pow(this.mouseY - this.y - 15, 2)
     );
-    if (this.isHoldingItem == true && cursorItems.canPlace == true) {
+    if (
+      this.isHoldingItem == true &&
+      cursorItems.canPlace == true &&
+      cursorItems != null
+    ) {
       this.cursorItems = this.getCursorItems();
       this.cursorImage.src = `assets/eqIcons/${this.cursorItems.name}Eq.webp`;
       if (distance <= 100 && this.getCursorItems().count > 0) {
@@ -200,14 +213,25 @@ export class Player {
     if (keysPressed['d']) {
       newX += this.speed;
     }
+    if (keysPressed['e'] && !this.functionIsExecuted) {
+      if (this.closestItem.interactive == true) {
+        this.closestItem.method();
+        this.functionIsExecuted = true;
+      }
+    }
+    if (keysPressed[' '] && this.canAttack) {
+      this.attack();
+    }
     if (keysPressed['g']) {
+      console.log(this.closestEnemies);
+
       inventory[9] = {
         name: craftableItems[1].name,
         x: 0,
         y: 0,
         height: craftableItems[1].height,
         width: craftableItems[1].width,
-        digTime: craftableItems[1].diggingTime,
+        digTime: craftableItems[1].digTime,
         interactive: craftableItems[1].interactive,
         count: 1,
         canPlace: craftableItems[1].canPlace,
@@ -217,13 +241,7 @@ export class Player {
       };
       console.log(interactiveObstacles);
     }
-    if (keysPressed['e'] && !this.functionIsExecuted) {
-      if (this.closestItem.interactive == true) {
-        this.closestItem.method();
-        this.day++;
-        this.functionIsExecuted = true;
-      }
-    }
+
     if (
       newY - this.speed <= 0 ||
       newY + this.speed >= this.canvas.height - 30 ||
@@ -237,7 +255,7 @@ export class Player {
       this.y = newY;
     }
 
-    if (keysPressed[' '] && !this.isCollecting) {
+    if (keysPressed['q'] && !this.isCollecting) {
       this.tryCollecting();
     }
   }
@@ -265,5 +283,67 @@ export class Player {
         break;
       }
     }
+  }
+  getDamageMove(enemyX: number, enemyY: number) {
+    let newCordX = player.x;
+    let newCordY = player.y;
+    if (player.getDamage) {
+      if (enemyX > player.x + 15) {
+        newCordX -= 8;
+      }
+      if (enemyX < player.x + 15) {
+        newCordX += 8;
+      }
+      if (enemyY > player.x + 15) {
+        newCordY -= 8;
+      }
+      if (enemyX < player.x + 15) {
+        newCordY += 8;
+      }
+    }
+    if (
+      newCordY - this.speed <= 0 ||
+      newCordY + this.speed >= this.canvas.height - 30 ||
+      newCordX - this.speed <= 0 ||
+      newCordX + this.speed >= this.canvas.width - 30
+    ) {
+      return;
+    }
+    if (
+      !this.isCollidingWithObstacle(
+        this.interactiveObstacles,
+        newCordX,
+        newCordY
+      )
+    ) {
+      player.x = newCordX;
+      player.y = newCordY;
+    }
+  }
+  distanceToEnemies() {
+    enemies.forEach((enemy) => {
+      let distance = Math.sqrt(
+        (this.x + 15 - enemy.x - enemy.width / 2) ** 2 +
+          (this.y + 15 - enemy.y - enemy.height / 2) ** 2
+      );
+      if (
+        distance < 75 &&
+        !closestEnemies.some((enemyItem) => enemyItem === enemy)
+      ) {
+        closestEnemies.push(enemy);
+      }
+    });
+  }
+  delay(ms: number) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
+  attack() {
+    closestEnemies.forEach((enemy) => {
+      this.canAttack = false;
+      enemy.health -= 10;
+      setTimeout(() => {
+        this.canAttack = true;
+      }, 1000);
+    });
   }
 }

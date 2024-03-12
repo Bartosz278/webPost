@@ -1,36 +1,26 @@
-import { Enemy } from './enemy.js';
 import { player } from './game.js';
+import { destroyObstacle, isCollidingWithObstacle, updateHP } from './utils.js';
 import { interactiveObstacles } from './objects.js';
-import { isCollidingWithObstacle } from './utils.js';
+import { Obstacle } from './player.js';
 
-export function initEnemies() {
-  const enemyImage = new Image();
-  enemyImage.src = 'assets/goblin.webp';
-
-  let enemies = [];
-  for (let i = 0; i < 5; i++) {
-    let name = 'goblin';
-    const x = Math.random() * player.canvas.width;
-    const y = Math.random() * player.canvas.height;
-    const health = 100;
-    const speed = 0.5;
-    const width = 40;
-    const height = 40;
-    const isCollidingWithObstacle2 = isCollidingWithObstacle;
-    let enemy = new Enemy(
-      name,
-      x,
-      y,
-      width,
-      height,
-      enemyImage,
-      health,
-      speed,
-      interactiveObstacles,
-      isCollidingWithObstacle2
-    );
-    enemies.push(enemy);
-  }
-
-  return enemies;
+export interface Mob {
+  name: string;
+  height: number;
+  width: number;
+  image: HTMLImageElement;
+  health: number;
+  speed: number;
+  damage: number;
 }
+
+export const mobs: Mob[] = [
+  {
+    name: 'goblin',
+    height: 40,
+    width: 40,
+    image: new Image(),
+    health: 100,
+    speed: 0.5,
+    damage: 4
+  }
+];

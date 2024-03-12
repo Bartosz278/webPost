@@ -55,11 +55,12 @@ function addItemToInventory(craftableItem: CraftableItem) {
           y: 0,
           height: craftableItem.height,
           width: craftableItem.width,
-          digTime: craftableItem.diggingTime,
+          digTime: craftableItem.digTime,
           interactive: craftableItem.interactive,
           count: 1,
           canPlace: craftableItem.canPlace,
-          method: craftableItem.method
+          method: craftableItem.method,
+          type: craftableItem.type
         };
         added = true;
         break;

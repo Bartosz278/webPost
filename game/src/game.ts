@@ -4,7 +4,7 @@ import {interactiveObstacles,createObstacles,drawObstacles} from './objects.js';
 //prettier-ignore
 import {collectItem,updateInventory,useItem,isHoldingItem,cursorItems,inventory,setIsHoldingItem,setCursorItems,getCursorItems} from './inventory.js';
 //prettier-ignore
-import {checkCollectibleProximity,showCollectInfo,isCollidingWithObstacle, dragElement} from './utils.js';
+import {checkCollectibleProximity,showCollectInfo,isCollidingWithObstacle, dragElement, updateHP, startNewGame} from './utils.js';
 //prettier-ignore
 import { Block, blocks } from './blocks.js';
 //prettier-ignore
@@ -12,17 +12,18 @@ import { drawCraftingWindow, moveWindow } from './crafting.js';
 //prettier-ignore
 // import { enemies } from './mobs.js';
 //prettier-ignore
-import { Enemy } from './enemy.js';
-import { initEnemies } from './mobs.js';
+import { Enemy, initEnemies, enemies } from './enemy.js';
+import { mobs } from './mobs.js';
 
 let canvas: HTMLCanvasElement = document.getElementById(
   'gameCanvas'
 ) as HTMLCanvasElement;
-const ctx: CanvasRenderingContext2D = canvas.getContext('2d');
+export const ctx: CanvasRenderingContext2D = canvas.getContext('2d');
 const infoBox: HTMLElement = document.getElementById('infoBox');
 export const inventoryEl: HTMLElement = document.getElementById('inventory');
 const backgroundImage: HTMLImageElement = new Image();
 const crafingIcon: HTMLElement = document.querySelector('#crafting');
+export const gameOverDiv = document.getElementById('gameOver');
 export const craftingWindow: HTMLElement =
   document.querySelector('#craftingWindow');
 const closeCraftingButton: HTMLElement = document.querySelector(
@@ -37,6 +38,7 @@ canvas.width = window.innerWidth * 0.96;
 canvas.height = window.innerHeight * 0.9;
 const playerImg: HTMLImageElement = new Image();
 playerImg.src = 'assets/character.webp';
+export const closestEnemies = [];
 
 export let player: Player = new Player(
   ctx,
@@ -57,18 +59,15 @@ function clearCanvas(): void {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
 
-export let enemies = initEnemies();
-function updateGame(): void {
+initEnemies(mobs[0], 2);
+export function updateGame(): void {
   clearCanvas();
   player.move(keysPressed);
   player.drawPlayer();
   enemies.forEach((enemy) => {
     enemy.update();
     enemy.draw();
-    enemies.forEach((enemy) => {
-      checkCollectibleProximity(interactiveObstacles, enemy);
-    });
-
+    checkCollectibleProximity(interactiveObstacles, enemy);
     if (enemy.moveFunctionIsCalled == false) {
       enemy.randomMove(0.5);
     }
@@ -80,6 +79,18 @@ function updateGame(): void {
   drawObstacles(ctx);
   drawCraftingWindow(player, craftingWindow);
   checkCollectibleProximity(interactiveObstacles, player);
+  if (player.hp == 0) {
+    document.getElementById('night').style.transition = '0.5s';
+    document.getElementById('night2').style.transition = '0.5s';
+    document.getElementById('night').style.opacity = '100%';
+    document.getElementById('night2').style.opacity = '60%';
+    document.getElementById('night').style.zIndex = '0';
+    document.getElementById('night2').style.zIndex = '0';
+    gameOverDiv.style.display = 'flex';
+    return;
+  }
+  player.distanceToEnemies();
+
   requestAnimationFrame(updateGame);
 }
 
@@ -120,7 +131,12 @@ document.addEventListener('click', (event: KeyboardEvent) => {
 enemies.forEach((enemy) => {
   enemy.randomizer();
 });
+
+const restartGameButton = document.getElementById('restartGame');
+restartGameButton.addEventListener('mousedown', startNewGame);
+
 dragElement(craftingWindow, craftingWindow);
 createObstacles(30);
 updateInventory();
 updateGame();
+updateHP();
