@@ -1,11 +1,10 @@
-import { interactiveObstacles } from './objects.js';
 //prettier-ignore
 import { inventory } from './inventory.js';
 import { craftableItems } from './items-in-crafting.js';
 import { closestEnemies, player } from './game.js';
 import { enemies } from './enemy.js';
 export class Player {
-    constructor(ctx, img, canvas, isCollidingWithObstacle, interactiveObstacles, showCollectInfo, collectItem, updateInventory, setIsHoldingItem, setCursorItems, getCursorItems, cursorItems) {
+    constructor(ctx, img, canvas, isCollidingWithObstacle, interactiveObstacles, showCollectInfo, collectItem, updateInventory, setIsHoldingItem, getIsHoldingItem, setCursorItems, getCursorItems, cursorItems) {
         this.ctx = ctx;
         this.img = img;
         this.canvas = canvas;
@@ -122,7 +121,7 @@ export class Player {
             this.attack();
         }
         if (keysPressed['g']) {
-            console.log(this.closestEnemies);
+            console.log(closestEnemies);
             inventory[9] = {
                 name: craftableItems[1].name,
                 x: 0,
@@ -137,7 +136,6 @@ export class Player {
                 method: craftableItems[1].method,
                 type: craftableItems[1].type
             };
-            console.log(interactiveObstacles);
         }
         if (newY - this.speed <= 0 ||
             newY + this.speed >= this.canvas.height - 30 ||
@@ -206,17 +204,35 @@ export class Player {
                 closestEnemies.push(enemy);
             }
         });
+        closestEnemies.forEach((enemy) => {
+            let distance = Math.sqrt(Math.pow((this.x + 15 - enemy.x - enemy.width / 2), 2) +
+                Math.pow((this.y + 15 - enemy.y - enemy.height / 2), 2));
+            if (distance > 75) {
+                let remove = closestEnemies.findIndex((enemy) => enemy.x === enemy.x);
+                if (remove !== -1) {
+                    closestEnemies.splice(remove, 1);
+                }
+            }
+        });
     }
     delay(ms) {
         return new Promise((resolve) => setTimeout(resolve, ms));
     }
     attack() {
+        this.canAttack = false;
         closestEnemies.forEach((enemy) => {
-            this.canAttack = false;
             enemy.health -= 10;
-            setTimeout(() => {
-                this.canAttack = true;
-            }, 1000);
         });
+        player.ctx.fillStyle = 'gray';
+        player.ctx.fillRect(this.x + 30, this.y + 15, 75, 5);
+        player.ctx.fillRect(this.x - 75, this.y + 15, 75, 5);
+        player.ctx.stroke();
+        player.ctx.fillStyle = 'gray';
+        player.ctx.fillRect(this.x + 15, this.y - 75, 5, 75);
+        player.ctx.fillRect(this.x + 15, this.y + 30, 5, 75);
+        player.ctx.stroke();
+        setTimeout(() => {
+            this.canAttack = true;
+        }, 1000);
     }
 }

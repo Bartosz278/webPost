@@ -2,13 +2,11 @@ import { Player } from './player.js';
 //prettier-ignore
 import { interactiveObstacles, createObstacles, drawObstacles } from './objects.js';
 //prettier-ignore
-import { collectItem, updateInventory, isHoldingItem, cursorItems, setIsHoldingItem, setCursorItems, getCursorItems } from './inventory.js';
+import { collectItem, updateInventory, cursorItems, setIsHoldingItem, setCursorItems, getCursorItems, getIsHoldingItem } from './inventory.js';
 //prettier-ignore
 import { checkCollectibleProximity, showCollectInfo, isCollidingWithObstacle, dragElement, updateHP, startNewGame } from './utils.js';
 //prettier-ignore
 import { drawCraftingWindow } from './crafting.js';
-//prettier-ignore
-// import { enemies } from './mobs.js';
 //prettier-ignore
 import { initEnemies, enemies } from './enemy.js';
 import { mobs } from './mobs.js';
@@ -30,7 +28,7 @@ canvas.height = window.innerHeight * 0.9;
 const playerImg = new Image();
 playerImg.src = 'assets/character.webp';
 export const closestEnemies = [];
-export let player = new Player(ctx, playerImg, canvas, isCollidingWithObstacle, interactiveObstacles, showCollectInfo, collectItem, updateInventory, setIsHoldingItem, setCursorItems, getCursorItems, cursorItems);
+export let player = new Player(ctx, playerImg, canvas, isCollidingWithObstacle, interactiveObstacles, showCollectInfo, collectItem, updateInventory, setIsHoldingItem, getIsHoldingItem, setCursorItems, getCursorItems, cursorItems);
 function clearCanvas() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
@@ -47,10 +45,10 @@ export function updateGame() {
             enemy.randomMove(0.5);
         }
     });
-    player.drawBuildRange();
-    player.isHoldingItem = isHoldingItem;
+    player.isHoldingItem = getIsHoldingItem();
     player.cursorItems = getCursorItems();
     player.closestItem = checkCollectibleProximity;
+    player.drawBuildRange();
     drawObstacles(ctx);
     drawCraftingWindow(player, craftingWindow);
     checkCollectibleProximity(interactiveObstacles, player);

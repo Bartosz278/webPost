@@ -2,15 +2,13 @@ import { Player } from './player.js';
 //prettier-ignore
 import {interactiveObstacles,createObstacles,drawObstacles} from './objects.js';
 //prettier-ignore
-import {collectItem,updateInventory,useItem,isHoldingItem,cursorItems,inventory,setIsHoldingItem,setCursorItems,getCursorItems} from './inventory.js';
+import {collectItem,updateInventory,useItem,isHoldingItem,cursorItems,inventory,setIsHoldingItem,setCursorItems,getCursorItems, getIsHoldingItem} from './inventory.js';
 //prettier-ignore
 import {checkCollectibleProximity,showCollectInfo,isCollidingWithObstacle, dragElement, updateHP, startNewGame} from './utils.js';
 //prettier-ignore
 import { Block, blocks } from './blocks.js';
 //prettier-ignore
 import { drawCraftingWindow, moveWindow } from './crafting.js';
-//prettier-ignore
-// import { enemies } from './mobs.js';
 //prettier-ignore
 import { Enemy, initEnemies, enemies } from './enemy.js';
 import { mobs } from './mobs.js';
@@ -50,6 +48,7 @@ export let player: Player = new Player(
   collectItem,
   updateInventory,
   setIsHoldingItem,
+  getIsHoldingItem,
   setCursorItems,
   getCursorItems,
   cursorItems
@@ -72,10 +71,11 @@ export function updateGame(): void {
       enemy.randomMove(0.5);
     }
   });
-  player.drawBuildRange();
-  player.isHoldingItem = isHoldingItem;
+
+  player.isHoldingItem = getIsHoldingItem();
   player.cursorItems = getCursorItems();
   player.closestItem = checkCollectibleProximity;
+  player.drawBuildRange();
   drawObstacles(ctx);
   drawCraftingWindow(player, craftingWindow);
   checkCollectibleProximity(interactiveObstacles, player);

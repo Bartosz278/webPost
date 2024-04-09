@@ -110,7 +110,7 @@ export class Enemy {
       ) {
         this.x = newX;
         this.y = newY;
-        if (this.distance < 60) {
+        if (this.distance < 40) {
           this.attack();
         }
       } else {

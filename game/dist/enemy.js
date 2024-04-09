@@ -61,7 +61,7 @@ export class Enemy {
             if (!this.isCollidingWithObstacle(this.interactiveObstacles, newX, newY)) {
                 this.x = newX;
                 this.y = newY;
-                if (this.distance < 60) {
+                if (this.distance < 40) {
                     this.attack();
                 }
             }

@@ -41,6 +41,7 @@ export class Player {
   collectItem: (index: number) => void;
   updateInventory: () => void;
   setIsHoldingItem: (value: boolean) => void;
+  getIsHoldingItem: (value: boolean) => void;
   setCursorItems: (item: Item) => void;
   getCursorItems: () => Item;
   x: number;
@@ -85,6 +86,7 @@ export class Player {
     collectItem: (index: number) => void,
     updateInventory: () => void,
     setIsHoldingItem: (value: boolean) => void,
+    getIsHoldingItem: (value: boolean) => void,
     setCursorItems: (item: Item) => void,
     getCursorItems: () => Item,
     cursorItems: Item
@@ -223,7 +225,7 @@ export class Player {
       this.attack();
     }
     if (keysPressed['g']) {
-      console.log(this.closestEnemies);
+      console.log(closestEnemies);
 
       inventory[9] = {
         name: craftableItems[1].name,
@@ -239,7 +241,6 @@ export class Player {
         method: craftableItems[1].method,
         type: craftableItems[1].type
       };
-      console.log(interactiveObstacles);
     }
 
     if (
@@ -333,17 +334,43 @@ export class Player {
         closestEnemies.push(enemy);
       }
     });
+    closestEnemies.forEach((enemy) => {
+      let distance = Math.sqrt(
+        (this.x + 15 - enemy.x - enemy.width / 2) ** 2 +
+          (this.y + 15 - enemy.y - enemy.height / 2) ** 2
+      );
+      if (distance > 75) {
+        let remove = closestEnemies.findIndex((enemy) => enemy.x === enemy.x);
+
+        if (remove !== -1) {
+          closestEnemies.splice(remove, 1);
+        }
+      }
+    });
   }
   delay(ms: number) {
     return new Promise((resolve) => setTimeout(resolve, ms));
   }
   attack() {
+    this.canAttack = false;
     closestEnemies.forEach((enemy) => {
-      this.canAttack = false;
       enemy.health -= 10;
-      setTimeout(() => {
-        this.canAttack = true;
-      }, 1000);
     });
+
+    player.ctx.fillStyle = 'gray';
+    player.ctx.fillRect(this.x + 30, this.y + 15, 75, 5);
+
+    player.ctx.fillRect(this.x - 75, this.y + 15, 75, 5);
+    player.ctx.stroke();
+
+    player.ctx.fillStyle = 'gray';
+    player.ctx.fillRect(this.x + 15, this.y - 75, 5, 75);
+
+    player.ctx.fillRect(this.x + 15, this.y + 30, 5, 75);
+    player.ctx.stroke();
+
+    setTimeout(() => {
+      this.canAttack = true;
+    }, 1000);
   }
 }

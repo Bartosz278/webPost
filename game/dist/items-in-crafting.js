@@ -30,6 +30,7 @@ export const craftableItems = [
         method: () => {
             player.day++;
             player.functionIsExecuted = true;
+            player.hp = 100 + player.day * 2;
             document.getElementById('night').style.opacity = '100%';
             document.getElementById('night2').style.opacity = '60%';
             document.getElementById('night').style.zIndex = '2';
